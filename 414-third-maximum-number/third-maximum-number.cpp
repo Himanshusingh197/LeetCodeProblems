@@ -2,40 +2,20 @@ class Solution {
 public:
     int thirdMax(vector<int>& nums) {
         int n = nums.size();
+        sort(nums.begin(), nums.end());
 
-        long long firstMax = LLONG_MIN;
-        long long secondMax = LLONG_MIN;
-        long long thirdMax = LLONG_MIN;
+        long long firstMax = nums[n-1];
+        int count = 1;
+        for(int i = n-2; i >= 0; i--){
 
-        for (int i = 0; i < n; i++) {
-
-            long long current = nums[i];
-
-            // Ignore duplicate values
-            if (current == firstMax ||
-                current == secondMax ||
-                current == thirdMax) {
-                continue;
+            if(nums[i] != nums[i+1]){
+                count++;
             }
 
-            if (current > firstMax) {
-                thirdMax = secondMax;
-                secondMax = firstMax;
-                firstMax = current;
-            }
-            else if (current > secondMax) {
-                thirdMax = secondMax;
-                secondMax = current;
-            }
-            else if (current > thirdMax) {
-                thirdMax = current;
+            if(count == 3){
+                return nums[i];
             }
         }
-
-        if (thirdMax == LLONG_MIN) {
-            return firstMax;
-        }
-
-        return thirdMax;
+        return firstMax;
     }
 };
