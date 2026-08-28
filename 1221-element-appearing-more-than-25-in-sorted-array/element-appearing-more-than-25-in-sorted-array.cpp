@@ -2,18 +2,14 @@ class Solution {
 public:
     int findSpecialInteger(vector<int>& arr) {
         int n = arr.size();
+        int k = n / 4;
 
-        unordered_map<int, int> mp;
-        int target = n / 4;
-        for(int i=0; i<n; i++){
-            mp[arr[i]]++;
-        }
-
-        for(auto freq : mp){
-            if(freq.second > target){
-                return freq.first;
+        for(int i = 0; i < n - k; i++) {
+            if(arr[i] == arr[i + k]) {
+                return arr[i];
             }
         }
+
         return -1;
     }
 };
