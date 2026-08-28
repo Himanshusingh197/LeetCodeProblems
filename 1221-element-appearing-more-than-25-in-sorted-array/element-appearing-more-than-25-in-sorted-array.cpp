@@ -2,14 +2,20 @@ class Solution {
 public:
     int findSpecialInteger(vector<int>& arr) {
         int n = arr.size();
-        int k = n / 4;
+        int count = 1;
 
-        for(int i = 0; i < n - k; i++) {
-            if(arr[i] == arr[i + k]) {
+        for(int i = 1; i < n; i++) {
+            if(arr[i] == arr[i - 1]) {
+                count++;
+            } else {
+                count = 1;
+            }
+
+            if(count > n / 4) {
                 return arr[i];
             }
         }
 
-        return -1;
+        return arr[0];
     }
 };
