@@ -11,33 +11,34 @@
 class Solution {
 public:
     vector<int> nodesBetweenCriticalPoints(ListNode* head) {
-        ListNode* prev = head;
-        ListNode* curr = head->next;
+        int prevVal = 0;
+        int currVal = 0;
+        int nextVal = 0;
 
-        int i = 1;
+        int minDist = INT_MAX;
         int prevCriticalPos = 0;
         int firstCriticalPos = 0;
 
-        int minDist = INT_MAX;
-        while(curr->next != NULL){
-            if((curr->val < prev->val && curr->val < curr->next->val) || (curr->val > prev->val && curr->val > curr->next->val)){
-                if(prevCriticalPos == 0){
-                    prevCriticalPos = i;
+        int i = 0;
+        vector<int> result = {-1, -1};
+
+        while(head != NULL){
+            prevVal = currVal;
+            currVal = nextVal;
+            nextVal = head->val;
+
+            if(prevVal != 0 && currVal != 0 && nextVal != 0 && ((prevVal > currVal && currVal < nextVal) || (prevVal < currVal && currVal > nextVal))){
+                if(firstCriticalPos == 0){
                     firstCriticalPos = i;
                 }else{
                     minDist = min(minDist, i - prevCriticalPos);
-                    prevCriticalPos = i;
+                    result = {minDist, i - firstCriticalPos};
                 }
-            }
+                prevCriticalPos = i;
+            } 
             i++;
-            prev = curr;
-            curr = curr->next;
+            head = head->next;
         }
-
-        if(minDist == INT_MAX){
-            return {-1, -1};
-        }
-        
-        return {minDist, prevCriticalPos - firstCriticalPos};
+        return result;
     }
 };
