@@ -1,16 +1,28 @@
 class Solution {
 public:
-    int numSquares(int n) {
-        vector<int> dp(n + 1, INT_MAX);
 
-        dp[0] = 0;
-
-        for(int i = 1; i <= n; i++) {
-            for(int j = 1; j * j <= i; j++) {
-                dp[i] = min(dp[i], dp[i - j * j] + 1);
-            }
+    int arr[10001];
+    int helper(int n){
+        if(n == 0){
+            return 0;
         }
 
-        return dp[n];
+        if(arr[n] != -1){
+            return arr[n];
+        }
+
+        int minCount = INT_MAX;
+        for(int i=1; i*i <= n; i++){
+            int result = 1 + helper(n - i*i);
+            minCount = min(minCount, result);
+        }
+        return arr[n] = minCount;
+    }
+
+
+    int numSquares(int n) {
+
+        memset(arr, -1, sizeof(arr));
+        return helper(n);
     }
 };
