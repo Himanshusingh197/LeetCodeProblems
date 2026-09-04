@@ -8,11 +8,11 @@ public:
 
         for(auto num : nums2){
             if(st1.find(num) != st1.end()){
-                st2.insert(num);
+                ans.push_back(num);
+                st1.erase(num);
             }
         }
-        vector<int> result(begin(st2), end(st2));
 
-        return result;
+        return ans;
     }
 };
