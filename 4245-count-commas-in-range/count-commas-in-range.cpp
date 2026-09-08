@@ -6,11 +6,8 @@ public:
             return 0;
         }
 
-        int count = 0;
-        for(int i=1000; i<=n; i++){
-            count++;
-        }
+        int ans = (n - 1000) + 1;
 
-        return count;
+        return ans;
     }
 };
