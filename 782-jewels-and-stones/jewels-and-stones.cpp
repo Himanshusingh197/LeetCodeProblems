@@ -1,18 +1,19 @@
 class Solution {
 public:
     int numJewelsInStones(string jewels, string stones) {
-        int m = jewels.length();
-        int n = stones.length();
+        int count[128] = {0};
 
-        int count = 0;
-        for(int i=0; i<m; i++){
-            for(int j=0; j<n; j++){
-                if(jewels[i] == stones[j]){
-                    count++;
-                }
+        for(char ch : jewels) {
+            count[ch] = 1;
+        }
+
+        int ans = 0;
+        for(char ch : stones) {
+            if(count[ch] == 1) {
+                ans++;
             }
         }
 
-        return count;
+        return ans;
     }
 };
