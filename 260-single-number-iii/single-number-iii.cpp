@@ -1,19 +1,25 @@
 class Solution {
 public:
     vector<int> singleNumber(vector<int>& nums) {
-        int n = nums.size();
-        unordered_map<int, int> mp;
+        long long ans = 0;
 
-        for(int i=0; i<n; i++){
-            mp[nums[i]]++;
+        for(int val : nums){
+            ans ^= val;
         }
 
-        vector<int> ans;
-        for(auto x : mp){
-            if(x.second == 1){
-                ans.push_back(x.first);
+        long long bit = ans & (-ans);
+
+        int a = 0;
+        int b = 0;
+        for(int num : nums){
+            if(num & bit){
+                a ^= num;
+            }
+            else{
+                b ^= num;
             }
         }
-        return ans;
+
+        return {a, b};
     }
 };
