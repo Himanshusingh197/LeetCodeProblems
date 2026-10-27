@@ -1,16 +1,16 @@
 class Solution {
 public:
     vector<string> createGrid(int m, int n) {
-        vector<string> grid(m, string(n, '#'));
+        string topRow(n, '.');
+        string remaining = string(n-1, '#') + '.';
 
-        for (int j = 0; j < n; j++) {
-            grid[0][j] = '.';
+        vector<string> result;
+        result.push_back(topRow);
+
+        for(int i = 1; i < m; i++) {
+            result.push_back(remaining);
         }
 
-        for (int i = 1; i < m; i++) {
-            grid[i][n - 1] = '.';
-        }
-
-        return grid;
+        return result;
     }
 };
