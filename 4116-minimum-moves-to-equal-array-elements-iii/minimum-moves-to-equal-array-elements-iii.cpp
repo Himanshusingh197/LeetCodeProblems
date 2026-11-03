@@ -10,9 +10,11 @@ public:
 
         int count = 0;
         for(int i=0; i<n; i++){
-           count = count + maxEl - nums[i];
+            while(nums[i] != maxEl){
+                nums[i]++;
+                count++;
+            }
         }
-
         return count;
     }
 };
