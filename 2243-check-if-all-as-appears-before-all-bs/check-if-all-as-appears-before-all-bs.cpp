@@ -1,13 +1,18 @@
+
 class Solution {
 public:
     bool checkString(string s) {
-        int n = s.length();
+        bool seenB = false;
 
-        for(int i=1; i<n; i++){
-            if(s[i-1] == 'b' && s[i] == 'a'){
+        for(char ch : s) {
+            if(ch == 'b') {
+                seenB = true;
+            }
+            else if(seenB) {
                 return false;
             }
         }
+
         return true;
     }
 };
